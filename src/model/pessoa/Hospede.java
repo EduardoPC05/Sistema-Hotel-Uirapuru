@@ -1,4 +1,4 @@
 package src.model.pessoa;
 
-public class Hospede {
+public class Hospede extends Pessoa{
 }
