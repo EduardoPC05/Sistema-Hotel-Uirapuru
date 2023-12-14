@@ -1,20 +1,30 @@
 package src.model.pagamento;
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.Random;
 
 public class Boleto implements MetodosPagamento{
-    private int valor;
+    private double valor;
     private LocalDate vencimento;
 
     private long codigo;
 
-    public Boleto(int valor, LocalDate vencimento) {
+    public Boleto(double valor, LocalDate vencimento) {
         this.valor = valor;
         this.vencimento = vencimento;
     }
+    private String gerarCodigo(){
+        int valor = (int) getValor();
+        LocalDate hoje = LocalDate.now();
+        long day = ChronoUnit.DAYS.between(getVencimento(),hoje);
 
-    public int getValor() {
+        return day + "";
+    }
+
+
+    public double getValor() {
         return valor;
     }
 
