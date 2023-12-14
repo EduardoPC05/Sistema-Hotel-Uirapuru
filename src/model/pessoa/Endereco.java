@@ -1,6 +1,6 @@
 package src.model.pessoa;
 
-public class Endereço {
+public class Endereco {
 
     private String estado;
     private String cidade;
@@ -9,7 +9,7 @@ public class Endereço {
     private String numRua;
     private String bairro;
 
-    public Endereço(String estado, String cidade, int CEP, String rua, String numRua, String bairro) {
+    public Endereco(String estado, String cidade, int CEP, String rua, String numRua, String bairro) {
         this.estado = estado;
         this.cidade = cidade;
         this.CEP = CEP;

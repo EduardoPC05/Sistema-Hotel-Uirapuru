@@ -6,13 +6,13 @@ import src.model.pessoa.documento.Documento;
 public class Pessoa {
 
     protected Documento documento;
-    protected Endereço endereço;
+    protected Endereco endereco;
     protected long telefone;
     protected String senha;
 
-    public Pessoa(Documento documento, Endereço endereço, long telefone, String senha) {
+    public Pessoa(Documento documento, Endereco endereco, long telefone, String senha) {
         this.documento = documento;
-        this.endereço = endereço;
+        this.endereco = endereco;
         this.telefone = telefone;
         this.senha = senha;
     }
@@ -21,8 +21,8 @@ public class Pessoa {
         return documento;
     }
 
-    public Endereço getEndereço() {
-        return endereço;
+    public Endereco getEndereço() {
+        return endereco;
     }
 
     public long getTelefone() {

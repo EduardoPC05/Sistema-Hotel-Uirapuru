@@ -7,8 +7,8 @@ public class Hospede extends Pessoa{
     private String email;
     private Boolean principal;
 
-    public Hospede(Documento documento, Endereço endereço, long telefone, String senha, String email, Boolean principal) {
-        super(documento, endereço, telefone, senha);
+    public Hospede(Documento documento, Endereco endereco, long telefone, String senha, String email, Boolean principal) {
+        super(documento, endereco, telefone, senha);
         this.email = email;
         this.principal = principal;
     }
