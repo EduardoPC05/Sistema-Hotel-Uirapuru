@@ -5,15 +5,15 @@ import java.time.LocalDate;
 public class Rg extends Documento{
 
     private String rg;
-    private long cpf;
+    private String cpf;
 
-    public Rg(String nome, String nomePai, String nomeMae, LocalDate dataNascimento, String naturalidade, LocalDate dataExpedicao, String rg, long cpf) {
+    public Rg(String nome, String nomePai, String nomeMae, LocalDate dataNascimento, String naturalidade, LocalDate dataExpedicao, String rg, String cpf) {
         super(nome, nomePai, nomeMae, dataNascimento, naturalidade, dataExpedicao);
         this.rg = rg;
         this.cpf = cpf;
     }
 
-    public long getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
