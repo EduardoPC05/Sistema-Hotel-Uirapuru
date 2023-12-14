@@ -5,7 +5,7 @@ import src.model.reserva.Reserva;
 
 public class Funcionario extends Pessoa {
 
-    private final Reserva reservaResponsavel;
+    private Reserva reservaResponsavel;
 
     public Funcionario(Documento documento, Endereco endereco, long telefone, String senha, Reserva reservaResponsavel) {
         super(documento, endereco, telefone, senha);

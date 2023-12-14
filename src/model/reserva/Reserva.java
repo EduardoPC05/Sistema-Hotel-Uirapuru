@@ -5,14 +5,14 @@ import src.model.pessoa.Hospede;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.ArrayList;
 
 public class Reserva {
 
     private Hospede hospedePrincipal;
-    private List<Hospede> acompanhantes;
+    private ArrayList<Hospede> acompanhantes;
     private Acomodacao acomodacao;
-    private List<ItemConsumido> consumacao;
+    private ArrayList<ItemConsumido> consumacao;
     private LocalDateTime chegada;
     private LocalDateTime saida;
     private double multa;
@@ -24,6 +24,8 @@ public class Reserva {
         this.acomodacao = acomodacao;
         this.chegada = chegada;
         this.saida = saida;
+
+        this.acompanhantes = new ArrayList<Hospede>();
     }
 
     public double calculaEstadia(LocalDateTime chegada, LocalDateTime saida){
@@ -45,12 +47,12 @@ public class Reserva {
         return total;
     }
 
-    public void addAcompanhantes(List<Hospede> acompanhantes) {
-        //Lógica para adicionar acompanhantes
+    public void addAcompanhantes(Hospede hospede) {
+        acompanhantes.add(hospede);
     }
 
-    public void removeAcompanhantes(){
-        //Lógica para remover acompanhantes;
+    public void removeAcompanhantes(Hospede hospede){
+        acompanhantes.remove(hospede);
     }
 
     public void setChegada(LocalDateTime chegada) {
@@ -77,7 +79,7 @@ public class Reserva {
         return hospedePrincipal;
     }
 
-    public List<Hospede> getAcompanhantes() {
+    public ArrayList<Hospede> getAcompanhantes() {
         return acompanhantes;
     }
 
@@ -85,7 +87,7 @@ public class Reserva {
         return acomodacao;
     }
 
-    public List<ItemConsumido> getConsumacao() {
+    public ArrayList<ItemConsumido> getConsumacao() {
         return consumacao;
     }
 
