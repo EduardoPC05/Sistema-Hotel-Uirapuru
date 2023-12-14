@@ -9,18 +9,19 @@ public class Boleto implements MetodosPagamento{
     private double valor;
     private LocalDate vencimento;
 
-    private long codigo;
+    private String codigo;
 
-    public Boleto(double valor, LocalDate vencimento) {
+    public Boleto(double valor) {
         this.valor = valor;
-        this.vencimento = vencimento;
+        this.vencimento = LocalDate.now().plusDays(30);
+        this.codigo = gerarCodigo();
     }
     private String gerarCodigo(){
-        int valor = (int) getValor();
-        LocalDate hoje = LocalDate.now();
-        long day = ChronoUnit.DAYS.between(getVencimento(),hoje);
+        long valor = (long) (getValor()*100);
+        long day = ChronoUnit.DAYS.between(INICIOBOLETO,getVencimento());
 
-        return day + "";
+        day = (long) (day * (Math.pow(10,10)));
+        return day + valor+" ";
     }
 
 
@@ -32,7 +33,7 @@ public class Boleto implements MetodosPagamento{
         return vencimento;
     }
 
-    public long getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 }
