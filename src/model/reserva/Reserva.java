@@ -108,6 +108,14 @@ public class Reserva {
         return desconto;
     }
 
+    public LocalDateTime getCheckIn() {
+        return checkIn;
+    }
+
+    public LocalDateTime getCheckOut() {
+        return checkOut;
+    }
+
     public MetodosPagamento getPagamento() {
         return pagamento;
     }

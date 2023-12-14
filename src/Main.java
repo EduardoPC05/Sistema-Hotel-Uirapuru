@@ -2,6 +2,8 @@ package src;
 
 import src.model.pagamento.Boleto;
 import src.model.pagamento.MetodosPagamento;
+import src.model.reserva.Acomodacao;
+import src.model.reserva.TipoQuarto;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -11,10 +13,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Boleto teste = new Boleto(123.90);
 
-        System.out.println(teste.gerarCodigo());
+        Acomodacao teste = new Acomodacao("12","12","ELE È BOM DMS", TipoQuarto.LUXO);
 
+        teste.
 
 
 

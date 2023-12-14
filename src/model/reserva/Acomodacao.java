@@ -1,6 +1,8 @@
 package src.model.reserva;
 
 
+import java.util.ArrayList;
+
 public class Acomodacao {
 
     private String codigo;
@@ -10,11 +12,14 @@ public class Acomodacao {
     private TipoQuarto tipoQuarto;
     private double precoDiaria;
 
+    private ArrayList<Reserva> reservas;
+
     public Acomodacao(String andar, String numero, String descricao, TipoQuarto tipoQuarto) {
         this.andar = andar;
         this.numero = numero;
         this.descricao = descricao;
         this.tipoQuarto = tipoQuarto;
+        this.reservas = new ArrayList<Reserva>();
         calculaPrecoDiaria(tipoQuarto);
         setCodigo(andar, numero);
     }
@@ -60,4 +65,31 @@ public class Acomodacao {
     public double getPrecoDiaria() {
         return precoDiaria;
     }
+
+    private void addReserva(Reserva novo){
+        this.reservas.add(novo);
+    }
+    public boolean efetuarReserva(Reserva nova){
+        if (verificaReserva(nova)){
+            addReserva(nova);
+            return true;
+        }
+        return  false;
+    }
+    public void removeReserva(Reserva excluir){
+        this.reservas.remove(excluir);
+    }
+    private boolean verificaReserva(Reserva nova){
+        for (Reserva r : this.reservas){
+            if (r.getAcomodacao().getTipoQuarto() == nova.getAcomodacao().getTipoQuarto()){
+                return !r.getChegada().isBefore(nova.getSaida()) ||
+                        !r.getSaida().isAfter(nova.getChegada());
+            }else{
+                return false;
+            }
+        }
+        return false;
+    }
+
+
 }
