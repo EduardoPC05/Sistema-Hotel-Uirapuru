@@ -27,6 +27,7 @@ replay_pid*
 # Files IDE
 
 /.idea/
+*.idea/
 
 
 *.iml

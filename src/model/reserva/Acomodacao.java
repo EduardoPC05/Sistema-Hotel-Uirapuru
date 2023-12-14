@@ -66,7 +66,7 @@ public class Acomodacao {
         return precoDiaria;
     }
 
-    private void addReserva(Reserva novo){
+    public void addReserva(Reserva novo){
         this.reservas.add(novo);
     }
     public boolean efetuarReserva(Reserva nova){
@@ -82,8 +82,8 @@ public class Acomodacao {
     private boolean verificaReserva(Reserva nova){
         for (Reserva r : this.reservas){
             if (r.getAcomodacao().getTipoQuarto() == nova.getAcomodacao().getTipoQuarto()){
-                return !r.getChegada().isBefore(nova.getSaida()) ||
-                        !r.getSaida().isAfter(nova.getChegada());
+                return !r.getCheckIn().isBefore(nova.getCheckOut()) ||
+                        !r.getCheckOut().isAfter(nova.getCheckIn());
             }else{
                 return false;
             }
