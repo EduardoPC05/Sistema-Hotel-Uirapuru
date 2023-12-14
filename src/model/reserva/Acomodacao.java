@@ -58,6 +58,10 @@ public class Acomodacao {
         return descricao;
     }
 
+    public ArrayList<Reserva> getReservas() {
+        return reservas;
+    }
+
     public TipoQuarto getTipoQuarto() {
         return tipoQuarto;
     }
@@ -69,22 +73,15 @@ public class Acomodacao {
     public void addReserva(Reserva novo){
         this.reservas.add(novo);
     }
-    public boolean efetuarReserva(Reserva nova){
-        if (verificaReserva(nova)){
-            addReserva(nova);
-            return true;
-        }
-        return  false;
-    }
+
     public void removeReserva(Reserva excluir){
         this.reservas.remove(excluir);
     }
-    private boolean verificaReserva(Reserva nova){
+    public boolean verificaReserva(Reserva nova){
         if(!reservas.isEmpty()) {
             for (Reserva r : this.reservas){
                 if (r.getAcomodacao().getTipoQuarto() == nova.getAcomodacao().getTipoQuarto()){
-                    return !r.getCheckIn().isBefore(nova.getCheckOut()) ||
-                            !r.getCheckOut().isAfter(nova.getCheckIn());
+                    return !r.getCheckIn().isBefore(nova.getCheckOut()) && !r.getCheckOut().isAfter(nova.getCheckIn());
                 }
             }
         }
