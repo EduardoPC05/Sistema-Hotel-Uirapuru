@@ -1,20 +1,31 @@
 package src.model.pagamento;
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.Random;
 
 public class Boleto implements MetodosPagamento{
-    private int valor;
+    private double valor;
     private LocalDate vencimento;
 
-    private long codigo;
+    private String codigo;
 
-    public Boleto(int valor, LocalDate vencimento) {
+    public Boleto(double valor) {
         this.valor = valor;
-        this.vencimento = vencimento;
+        this.vencimento = LocalDate.now().plusDays(30);
+        this.codigo = gerarCodigo();
+    }
+    private String gerarCodigo(){
+        long valor = (long) (getValor()*100);
+        long day = ChronoUnit.DAYS.between(INICIOBOLETO,getVencimento());
+
+        day = (long) (day * (Math.pow(10,10)));
+        return day + valor+" ";
     }
 
-    public int getValor() {
+
+    public double getValor() {
         return valor;
     }
 
@@ -22,7 +33,7 @@ public class Boleto implements MetodosPagamento{
         return vencimento;
     }
 
-    public long getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 }
