@@ -36,7 +36,7 @@ public class Main {
         Reserva reserva = new Reserva(eduardo, teste, LocalDateTime.of(2021, Month.JANUARY, 1, 1, 1), LocalDateTime.of(2021, Month.FEBRUARY, 10, 1, 1));
         teste.addReserva(reserva);
 
-        Reserva reserva2 = new Reserva(eduardo, teste, LocalDateTime.of(2021, Month.FEBRUARY, 10, 1, 0), LocalDateTime.of(2021, Month.FEBRUARY, 20, 1, 1));
+        Reserva reserva2 = new Reserva(eduardo, teste, LocalDateTime.of(2021, Month.FEBRUARY, 11, 1, 1), LocalDateTime.of(2021, Month.FEBRUARY, 20, 1, 1));
         Reserva reserva3 = new Reserva(eduardo, teste, LocalDateTime.of(2021, Month.JANUARY, 10, 1, 1), LocalDateTime.of(2021, Month.JANUARY, 12, 1, 1));
 
 

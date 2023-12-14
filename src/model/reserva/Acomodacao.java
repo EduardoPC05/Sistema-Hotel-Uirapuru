@@ -80,15 +80,15 @@ public class Acomodacao {
         this.reservas.remove(excluir);
     }
     private boolean verificaReserva(Reserva nova){
-        for (Reserva r : this.reservas){
-            if (r.getAcomodacao().getTipoQuarto() == nova.getAcomodacao().getTipoQuarto()){
-                return !r.getCheckIn().isBefore(nova.getCheckOut()) ||
-                        !r.getCheckOut().isAfter(nova.getCheckIn());
-            }else{
-                return false;
+        if(!reservas.isEmpty()) {
+            for (Reserva r : this.reservas){
+                if (r.getAcomodacao().getTipoQuarto() == nova.getAcomodacao().getTipoQuarto()){
+                    return !r.getCheckIn().isBefore(nova.getCheckOut()) ||
+                            !r.getCheckOut().isAfter(nova.getCheckIn());
+                }
             }
         }
-        return false;
+        return true;
     }
 
 
