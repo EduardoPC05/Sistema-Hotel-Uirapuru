@@ -15,16 +15,17 @@ public class Reserva {
     private ArrayList<ItemConsumido> consumacao;
     private LocalDateTime chegada;
     private LocalDateTime saida;
+    private LocalDateTime checkIn;
+    private LocalDateTime checkOut;
     private double multa;
     private double desconto;
     private MetodosPagamento pagamento;
 
-    public Reserva(Hospede hospedePrincipal, Acomodacao acomodacao, LocalDateTime chegada, LocalDateTime saida) {
+    public Reserva(Hospede hospedePrincipal, Acomodacao acomodacao, LocalDateTime checkIn, LocalDateTime checkOut) {
         this.hospedePrincipal = hospedePrincipal;
         this.acomodacao = acomodacao;
-        this.chegada = chegada;
-        this.saida = saida;
-
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
         this.acompanhantes = new ArrayList<Hospede>();
     }
 
