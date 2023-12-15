@@ -23,7 +23,7 @@ public class Main {
 
         Hotel hotel = new Hotel();
 
-        Endereco endereco = new Endereco("CE","Fortaleza",123123,"Rua das avenidas","123","Bairro");
+        Endereco endereco = new Endereco("CE","Fortaleza","123123","Rua das avenidas","123","Bairro");
         Documento doc = new Rg("Eduardo", "Jucá", "Maria", LocalDate.of(1999, Month.JANUARY, 1), "Fortaleza", LocalDate.of(2010, Month.JANUARY, 1), "123123123", "123123123");
         Hospede eduardo = new Hospede(doc,endereco, 1233123311, "jucas", "email@email.com", true);
 

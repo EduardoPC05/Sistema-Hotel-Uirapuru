@@ -4,12 +4,12 @@ public class Endereco {
 
     private String estado;
     private String cidade;
-    private long CEP;
+    private String CEP;
     private String rua;
     private String numRua;
     private String bairro;
 
-    public Endereco(String estado, String cidade, int CEP, String rua, String numRua, String bairro) {
+    public Endereco(String estado, String cidade, String CEP, String rua, String numRua, String bairro) {
         this.estado = estado;
         this.cidade = cidade;
         this.CEP = CEP;
@@ -26,7 +26,7 @@ public class Endereco {
         return cidade;
     }
 
-    public long getCEP() {
+    public String getCEP() {
         return CEP;
     }
 
