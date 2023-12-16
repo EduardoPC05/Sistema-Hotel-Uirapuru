@@ -5,6 +5,8 @@ import src.model.pessoa.clientes.Cliente;
 import src.model.pessoa.clientes.Hospede;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Reserva {
@@ -12,15 +14,15 @@ public class Reserva {
     private Cliente hospedePrincipal;
     private ArrayList<Acompanhante> acompanhantes;
     private TipoQuarto tipoQuarto;
-    private LocalDate checkIn;
-    private LocalDate checkOut;
+    private LocalDateTime checkIn;
+    private LocalDateTime checkOut;
 
     public Reserva(Cliente hospedePrincipal, ArrayList<Acompanhante> acompanhantes,TipoQuarto tipoQuarto, LocalDate checkIn, LocalDate checkOut) {
         this.hospedePrincipal = hospedePrincipal;
         this.acompanhantes = acompanhantes;
         this.tipoQuarto = tipoQuarto;
-        this.checkIn = checkIn;
-        this.checkOut = checkOut;
+        this.checkIn = LocalDateTime.of(checkIn,LocalTime.of(9,0,0)); // Horário minimo para dar entrada no hotel
+        this.checkOut = LocalDateTime.of(checkOut,LocalTime.of(12,0,0)); // Horário maximo para sair do hotel
     }
 
     public void addAcompanhantes(Acompanhante acompanhante) {
@@ -43,11 +45,11 @@ public class Reserva {
         return acompanhantes;
     }
 
-    public LocalDate getCheckIn() {
+    public LocalDateTime getCheckIn() {
         return checkIn;
     }
 
-    public LocalDate getCheckOut() {
+    public LocalDateTime getCheckOut() {
         return checkOut;
     }
 }

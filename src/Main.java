@@ -32,11 +32,6 @@ public class Main {
 
         Cliente ed = new Cliente("Ed",doc,tes);
 
-
-
-
-
-
         Acompanhante e1 = new Acompanhante("Au",doc);
 
         ArrayList<Acompanhante> a = new ArrayList<Acompanhante>();
@@ -53,15 +48,14 @@ public class Main {
         }
 
 
+        System.out.println(hotel.efetuarReserva(reserva));
+        System.out.println(hotel.efetuarReserva(reserva2));
+        System.out.println(hotel.efetuarReserva(reserva3));
+        System.out.println(hotel.efetuarReserva(reserva4));
 
-
-//        System.out.println(hotel.efetuarReserva(reserva));
-//        System.out.println(hotel.efetuarReserva(reserva2));
-//        System.out.println(hotel.efetuarReserva(reserva3));
-//        System.out.println(hotel.efetuarReserva(reserva4));
-//
-//        System.out.println(hotel.getAcomodacaoPorTipo(TipoQuarto.LUXO).getReservas().size());
-
+        /*
+           System.out.println(hotel.getAcomodacaoPorTipo(TipoQuarto.LUXO).getReservas().size());
+         */
 
 
     }
