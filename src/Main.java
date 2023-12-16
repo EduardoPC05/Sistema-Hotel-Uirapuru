@@ -1,16 +1,5 @@
 package src;
 
-import src.model.Hotel;
-import src.model.pessoa.Endereco;
-import src.model.pessoa.Hospede;
-import src.model.pessoa.documento.Documento;
-import src.model.reserva.Reserva;
-import src.model.reserva.TipoQuarto;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
-
 public class Main {
 
     public static void main(String[] args) {

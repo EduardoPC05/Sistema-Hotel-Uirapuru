@@ -1,8 +1,5 @@
 package src.model;
 
-import src.model.pessoa.Endereco;
-import src.model.pessoa.Funcionario;
-import src.model.pessoa.Hospede;
 import src.model.pessoa.documento.Documento;
 import src.model.reserva.Acomodacao;
 import src.model.reserva.Reserva;

@@ -1,20 +1,17 @@
-package src.model.pessoa;
+package src.model.pessoa.endereco;
 
 public class Endereco {
-
     private String estado;
     private String cidade;
-    private String CEP;
     private String rua;
-    private String numRua;
+    private String numero;
     private String bairro;
 
-    public Endereco(String estado, String cidade, String CEP, String rua, String numRua, String bairro) {
+    public Endereco(String estado, String cidade, String rua, String numero, String bairro) {
         this.estado = estado;
         this.cidade = cidade;
-        this.CEP = CEP;
         this.rua = rua;
-        this.numRua = numRua;
+        this.numero = numero;
         this.bairro = bairro;
     }
 
@@ -26,16 +23,12 @@ public class Endereco {
         return cidade;
     }
 
-    public String getCEP() {
-        return CEP;
-    }
-
     public String getRua() {
         return rua;
     }
 
-    public String getNumRua() {
-        return numRua;
+    public String getNumero() {
+        return numero;
     }
 
     public String getBairro() {
