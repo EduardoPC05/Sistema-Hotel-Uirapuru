@@ -11,8 +11,11 @@ public class Acomodacao {
     private String descricao;
     private TipoQuarto tipoQuarto;
     private double precoDiaria;
-
     private ArrayList<Reserva> reservas;
+    private int limiteAdultos;
+
+    private int limiteCriancas;
+
 
     public Acomodacao(String andar, String numero, String descricao, TipoQuarto tipoQuarto) {
         this.andar = andar;
@@ -22,6 +25,7 @@ public class Acomodacao {
         this.reservas = new ArrayList<Reserva>();
         calculaPrecoDiaria(tipoQuarto);
         setCodigo(andar, numero);
+        setQtdpessoas(tipoQuarto);
     }
 
     private void calculaPrecoDiaria(TipoQuarto tipoQuarto){
@@ -34,6 +38,23 @@ public class Acomodacao {
                 break;
             case LUXO:
                 precoDiaria = 250.00;
+                break;
+        }
+    }
+
+    private void setQtdpessoas(TipoQuarto tipoQuarto){
+        switch (tipoQuarto){
+            case NORMAL:
+                limiteAdultos = 2;
+                limiteCriancas = 1;
+                break;
+            case SUITE:
+                limiteAdultos = 3;
+                limiteCriancas = 2;
+                break;
+            case LUXO:
+                limiteAdultos = 3;
+                limiteCriancas = 2;
                 break;
         }
     }
@@ -68,6 +89,14 @@ public class Acomodacao {
 
     public double getPrecoDiaria() {
         return precoDiaria;
+    }
+
+    public int getLimiteAdultos() {
+        return limiteAdultos;
+    }
+
+    public int getLimiteCriancas() {
+        return limiteCriancas;
     }
 
     public void addReserva(Reserva novo){

@@ -17,6 +17,9 @@ public class Reserva {
     private LocalDateTime checkIn;
     private LocalDateTime checkOut;
 
+
+
+
     public Reserva(Cliente hospedePrincipal, ArrayList<Acompanhante> acompanhantes,TipoQuarto tipoQuarto, LocalDate checkIn, LocalDate checkOut) {
         this.hospedePrincipal = hospedePrincipal;
         this.acompanhantes = acompanhantes;
