@@ -25,7 +25,7 @@ public class Hotel {
     public Hotel() {
         // DADOS MOCKADOS
 
-        /*
+
 
 
         Acomodacao teste = new Acomodacao("12","12","ELE È BOM DMS", TipoQuarto.LUXO);
@@ -41,7 +41,7 @@ public class Hotel {
 
 
 
-         */
+
 
     }
 
