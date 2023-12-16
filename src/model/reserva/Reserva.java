@@ -1,23 +1,21 @@
 package src.model.reserva;
 
-import src.model.pagamento.MetodosPagamento;
 import src.model.pessoa.clientes.Acompanhante;
+import src.model.pessoa.clientes.Cliente;
 import src.model.pessoa.clientes.Hospede;
 
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Reserva {
 
-    private Hospede hospedePrincipal;
+    private Cliente hospedePrincipal;
     private ArrayList<Acompanhante> acompanhantes;
     private TipoQuarto tipoQuarto;
     private LocalDate checkIn;
     private LocalDate checkOut;
 
-    public Reserva(Hospede hospedePrincipal, ArrayList<Acompanhante> acompanhantes,TipoQuarto tipoQuarto, LocalDate checkIn, LocalDate checkOut) {
+    public Reserva(Cliente hospedePrincipal, ArrayList<Acompanhante> acompanhantes,TipoQuarto tipoQuarto, LocalDate checkIn, LocalDate checkOut) {
         this.hospedePrincipal = hospedePrincipal;
         this.acompanhantes = acompanhantes;
         this.tipoQuarto = tipoQuarto;
@@ -37,7 +35,7 @@ public class Reserva {
         return tipoQuarto;
     }
 
-    public Hospede getHospedePrincipal() {
+    public Cliente getHospedePrincipal() {
         return hospedePrincipal;
     }
 

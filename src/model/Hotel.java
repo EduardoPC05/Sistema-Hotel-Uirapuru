@@ -1,13 +1,11 @@
 package src.model;
 
-import src.model.pessoa.Pessoa;
 import src.model.pessoa.clientes.Cliente;
 import src.model.pessoa.clientes.Hospede;
 import src.model.pessoa.documento.Documento;
 import src.model.pessoa.documento.TipoDocumento;
 import src.model.pessoa.endereco.Endereco;
 import src.model.pessoa.funcionario.Funcionario;
-import src.model.pessoa.login.InfoLogin;
 import src.model.reserva.Acomodacao;
 import src.model.reserva.Reserva;
 import src.model.reserva.TipoQuarto;
@@ -50,11 +48,11 @@ public class Hotel {
         Acomodacao quarto = new Acomodacao(andar,num,descricao,tipoQ);
          return addAcomodacao(quarto);
     }
-    public boolean removerAcomodacao(Acomodacao quarto){
-        //TODO
-        //Fazer verificações referentes a debitos;
-        return removeAcomodacao(quarto);
+
+    public boolean removeAcomodacao(String codigo){
+        return this.acomodacoes.removeIf(i -> i.getCodigo().equals(codigo));
     }
+
     public Acomodacao getAcomodacaoPorTipo(TipoQuarto tipoQuarto){
         for (Acomodacao acomodacao: acomodacoes) {
             if(acomodacao.getTipoQuarto() == tipoQuarto){
@@ -63,9 +61,7 @@ public class Hotel {
         }
         return null;
     }
-    public boolean removeAcomodacao(String codigo){
-        return this.acomodacoes.removeIf(i -> i.getCodigo().equals(codigo));
-    }
+
     private boolean addAcomodacao(Acomodacao quarto){
         return this.acomodacoes.add(quarto);
     }
@@ -82,7 +78,6 @@ public class Hotel {
         }
         return acomodacoesPorTipo;
     }
-
 
     public boolean efetuarReserva(Reserva nova){
         ArrayList<Acomodacao> acomodacoes = getAcomodacoesPorTipo(nova.getTipoQuarto());
@@ -109,8 +104,8 @@ public class Hotel {
        return this.reversasAtivas.remove(excluir);
     }
 
-    public Hospede criarHospedes(String nome, Documento documento, InfoLogin infoLogin, Endereco endereco, String telefone){
-       return new Hospede(nome,documento,infoLogin,endereco,telefone);
+    public Hospede criarHospede(Cliente cliente, Endereco endereco, String telefone){
+       return new Hospede(cliente,endereco,telefone);
     }
 
     public Endereco criarEndereco( String estado,String cidade,String rua,String numero,String bairro){

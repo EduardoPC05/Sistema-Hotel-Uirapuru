@@ -2,10 +2,9 @@ package src;
 
 import src.model.Hotel;
 import src.model.pessoa.clientes.Acompanhante;
-import src.model.pessoa.clientes.Hospede;
+import src.model.pessoa.clientes.Cliente;
 import src.model.pessoa.documento.Documento;
 import src.model.pessoa.documento.TipoDocumento;
-import src.model.pessoa.endereco.Endereco;
 import src.model.pessoa.login.InfoLogin;
 import src.model.pessoa.login.TipoLogin;
 import src.model.reserva.Reserva;
@@ -21,12 +20,11 @@ public class Main {
 
         Hotel hotel = new Hotel();
 
-        Endereco endereco = new Endereco("CE","Fortaleza","123123","Rua das avenidas","123");
         Documento doc = new Documento("Eduardo", "Jucá", LocalDate.of(1999, Month.JANUARY, 1), "br", "123", TipoDocumento.CPF);
 
         InfoLogin tes = new InfoLogin("@teste","123", TipoLogin.ADMINISTRADOR);
 
-        Hospede ed = new Hospede("Ed",doc,tes,endereco,"21243121");
+        Cliente ed = new Cliente("Ed",doc, tes);
 
         Acompanhante e1 = new Acompanhante("Au",doc);
 
