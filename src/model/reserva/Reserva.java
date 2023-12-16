@@ -1,7 +1,6 @@
 package src.model.reserva;
 
 import src.model.pagamento.MetodosPagamento;
-import src.model.pessoa.Hospede;
 
 import java.time.Duration;
 import java.time.LocalDateTime;

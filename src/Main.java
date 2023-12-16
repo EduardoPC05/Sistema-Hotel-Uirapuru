@@ -1,28 +1,11 @@
 package src;
 
-import src.model.Hotel;
-import src.model.pessoa.Endereco;
-import src.model.pessoa.Hospede;
-import src.model.pessoa.documento.Documento;
-import src.model.reserva.Acomodacao;
-import src.model.reserva.Reserva;
-import src.model.reserva.TipoQuarto;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.util.ArrayList;
-
 public class Main {
 
     public static void main(String[] args) {
 
-
-
-
         /*
-
-          Hotel hotel = new Hotel();
+        Hotel hotel = new Hotel();
 
         Endereco endereco = new Endereco("CE","Fortaleza","123123","Rua das avenidas","123","Bairro");
         Documento doc = new Rg("Eduardo", "Jucá", "Maria", LocalDate.of(1999, Month.JANUARY, 1), "Fortaleza", LocalDate.of(2010, Month.JANUARY, 1), "123123123", "123123123");
