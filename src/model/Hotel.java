@@ -21,23 +21,16 @@ public class Hotel {
     public Hotel() {
         // DADOS MOCKADOS
 
-
-
-
         Acomodacao teste = new Acomodacao("12","12","ELE È BOM DMS", TipoQuarto.LUXO);
         Acomodacao teste1 = new Acomodacao("12","33","ELE È BOM DMS", TipoQuarto.LUXO);
         Acomodacao teste2 = new Acomodacao("12","44","ELE È BOM DMS", TipoQuarto.NORMAL);
-//        Acomodacao teste3 = new Acomodacao("12","44","ELE È BOM DMS", TipoQuarto.SUITE);
+        Acomodacao teste3 = new Acomodacao("12","44","ELE È BOM DMS", TipoQuarto.SUITE);
 
         this.acomodacoes = new ArrayList<Acomodacao>();
         acomodacoes.add(teste);
         acomodacoes.add(teste1);
         acomodacoes.add(teste2);
-//        acomodacoes.add(teste3);
-
-
-
-
+        acomodacoes.add(teste3);
 
     }
 
@@ -56,7 +49,7 @@ public class Hotel {
                 return acomodacao;
             }
         }
-        throw new RuntimeException("SEM TIPO");
+       return null;
     }
     public boolean removeAcomodacao(String codigo){
         return this.acomodacoes.removeIf(i -> i.getCodigo().equals(codigo));
@@ -119,10 +112,8 @@ public class Hotel {
         ArrayList<Acomodacao> retorno = new ArrayList<>();
 
         for (TipoQuarto c: TipoQuarto.values()){
-            try {
+            if (getAcomodacaoPorTipo(c) != null){
                 retorno.add(getAcomodacaoPorTipo(c));
-            }catch (RuntimeException e) {
-
             }
         }
 
