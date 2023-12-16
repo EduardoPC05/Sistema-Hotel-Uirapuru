@@ -1,17 +1,13 @@
 package src.model;
 
-import src.model.pessoa.Pessoa;
 import src.model.pessoa.clientes.Cliente;
 import src.model.pessoa.clientes.Hospede;
-import src.model.pessoa.documento.Documento;
 import src.model.pessoa.endereco.Endereco;
 import src.model.pessoa.funcionario.Funcionario;
-import src.model.pessoa.login.InfoLogin;
 import src.model.reserva.Acomodacao;
 import src.model.reserva.Reserva;
 import src.model.reserva.TipoQuarto;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Hotel {
@@ -111,8 +107,8 @@ public class Hotel {
     }
 
 
-    public Hospede criarHospedes(String nome, Documento documento, InfoLogin infoLogin, Endereco endereco, String telefone){
-       return new Hospede(nome,documento,infoLogin,endereco,telefone);
+    public Hospede criarHospedes(Cliente cliente,Endereco endereco, String telefone){
+       return new Hospede(cliente,endereco,telefone);
     }
 
     public Endereco criarEndereco( String estado,String cidade,String rua,String numero,String bairro){

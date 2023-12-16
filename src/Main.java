@@ -2,6 +2,7 @@ package src;
 
 import src.model.Hotel;
 import src.model.pessoa.clientes.Acompanhante;
+import src.model.pessoa.clientes.Cliente;
 import src.model.pessoa.clientes.Hospede;
 import src.model.pessoa.documento.Documento;
 import src.model.pessoa.documento.TipoDocumento;
@@ -29,7 +30,9 @@ public class Main {
 
         InfoLogin tes = new InfoLogin("@teste","123", TipoLogin.ADMINISTRADOR);
 
-        Hospede ed = new Hospede("Ed",doc,tes,endereco,"21243121");
+        Cliente ed = new Cliente("Ed",doc,tes);
+
+
 
 
 
