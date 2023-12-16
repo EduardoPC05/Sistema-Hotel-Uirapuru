@@ -21,7 +21,10 @@ public class Hotel {
 
     public Hotel() {
         // DADOS MOCKADOS
+
         /*
+
+
         Acomodacao teste = new Acomodacao("12","12","ELE È BOM DMS", TipoQuarto.LUXO);
         Acomodacao teste1 = new Acomodacao("12","33","ELE È BOM DMS", TipoQuarto.LUXO);
         Acomodacao teste2 = new Acomodacao("12","44","ELE È BOM DMS", TipoQuarto.NORMAL);
@@ -33,7 +36,10 @@ public class Hotel {
         acomodacoes.add(teste2);
         acomodacoes.add(teste3);
 
+
+
          */
+
     }
 
     public boolean criarAcomodacao(String andar, String num, String descricao, TipoQuarto tipoQ){
@@ -53,13 +59,17 @@ public class Hotel {
         }
         return null;
     }
+    public boolean removeAcomodacao(String codigo){
+        return this.acomodacoes.removeIf(i -> i.getCodigo().equals(codigo));
+    }
     private boolean addAcomodacao(Acomodacao quarto){
         return this.acomodacoes.add(quarto);
     }
     private boolean removeAcomodacao(Acomodacao quarto){
         return this.acomodacoes.remove(quarto);
     }
-    private ArrayList<Acomodacao> getAcomodacoesPorTipo(TipoQuarto tipo) {
+
+    public ArrayList<Acomodacao> getAcomodacoesPorTipo(TipoQuarto tipo) {
         ArrayList<Acomodacao> acomodacoesPorTipo = new ArrayList<Acomodacao>();
         for (Acomodacao acomodacao: acomodacoes) {
             if(acomodacao.getTipoQuarto() == tipo){
@@ -104,11 +114,11 @@ public class Hotel {
         return new Endereco(estado,cidade,cep,rua,numRua,bairro);
     };
 
-    public Documento criarDocumento(String nome, String nomePai, String nomeMae, LocalDate dtNascimento,String naturalidade,LocalDate expedicao, String rg, String cpf){
-        return new Rg(nome,nomePai,nomeMae,dtNascimento,naturalidade,expedicao,rg,cpf);
-    }
-    public Documento criarDocumento(String nome, String nomePai, String nomeMae, LocalDate dtnascimento,String naturalidade,LocalDate dtexpedicao, String number, String nacionalidade, LocalDate dtVencimento){
-        return new Passaporte(nome,nomePai,nomeMae,dtnascimento,naturalidade,dtexpedicao,number,nacionalidade,dtVencimento);
-    }
+//    public Documento criarDocumento(String nome, String nomePai, String nomeMae, LocalDate dtNascimento,String naturalidade,LocalDate expedicao, String rg, String cpf){
+//        return new Rg(nome,nomePai,nomeMae,dtNascimento,naturalidade,expedicao,rg,cpf);
+//    }
+//    public Documento criarDocumento(String nome, String nomePai, String nomeMae, LocalDate dtnascimento,String naturalidade,LocalDate dtexpedicao, String number, String nacionalidade, LocalDate dtVencimento){
+//        return new Passaporte(nome,nomePai,nomeMae,dtnascimento,naturalidade,dtexpedicao,number,nacionalidade,dtVencimento);
+//    }
 
 }
