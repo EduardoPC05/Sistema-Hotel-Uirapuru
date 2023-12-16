@@ -8,6 +8,7 @@ import src.model.pessoa.documento.TipoDocumento;
 import src.model.pessoa.endereco.Endereco;
 import src.model.pessoa.login.InfoLogin;
 import src.model.pessoa.login.TipoLogin;
+import src.model.reserva.Acomodacao;
 import src.model.reserva.Reserva;
 import src.model.reserva.TipoQuarto;
 
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static <e> void main(String[] args) {
 
 
         Hotel hotel = new Hotel();
@@ -44,18 +45,19 @@ public class Main {
         Reserva reserva4 = new Reserva(ed,a, TipoQuarto.LUXO,LocalDate.of(2011,Month.OCTOBER,20), LocalDate.of(2011,Month.OCTOBER,30));
 
 
+        for (Acomodacao c: hotel.getTipoQuartosDisponiveis()){
+            System.out.println(c.getTipoQuarto());
+        }
 
 
 
 
-
-
-        System.out.println(hotel.efetuarReserva(reserva));
-        System.out.println(hotel.efetuarReserva(reserva2));
-        System.out.println(hotel.efetuarReserva(reserva3));
-        System.out.println(hotel.efetuarReserva(reserva4));
-
-        System.out.println(hotel.getAcomodacaoPorTipo(TipoQuarto.LUXO).getReservas().size());
+//        System.out.println(hotel.efetuarReserva(reserva));
+//        System.out.println(hotel.efetuarReserva(reserva2));
+//        System.out.println(hotel.efetuarReserva(reserva3));
+//        System.out.println(hotel.efetuarReserva(reserva4));
+//
+//        System.out.println(hotel.getAcomodacaoPorTipo(TipoQuarto.LUXO).getReservas().size());
 
 
 

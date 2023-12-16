@@ -31,13 +31,13 @@ public class Hotel {
         Acomodacao teste = new Acomodacao("12","12","ELE È BOM DMS", TipoQuarto.LUXO);
         Acomodacao teste1 = new Acomodacao("12","33","ELE È BOM DMS", TipoQuarto.LUXO);
         Acomodacao teste2 = new Acomodacao("12","44","ELE È BOM DMS", TipoQuarto.NORMAL);
-        Acomodacao teste3 = new Acomodacao("12","44","ELE È BOM DMS", TipoQuarto.SUITE);
+//        Acomodacao teste3 = new Acomodacao("12","44","ELE È BOM DMS", TipoQuarto.SUITE);
 
         this.acomodacoes = new ArrayList<Acomodacao>();
         acomodacoes.add(teste);
         acomodacoes.add(teste1);
         acomodacoes.add(teste2);
-        acomodacoes.add(teste3);
+//        acomodacoes.add(teste3);
 
 
 
@@ -60,7 +60,7 @@ public class Hotel {
                 return acomodacao;
             }
         }
-        return null;
+        throw new RuntimeException("SEM TIPO");
     }
     public boolean removeAcomodacao(String codigo){
         return this.acomodacoes.removeIf(i -> i.getCodigo().equals(codigo));
@@ -74,13 +74,15 @@ public class Hotel {
 
     public ArrayList<Acomodacao> getAcomodacoesPorTipo(TipoQuarto tipo) {
         ArrayList<Acomodacao> acomodacoesPorTipo = new ArrayList<Acomodacao>();
-        for (Acomodacao acomodacao: acomodacoes) {
-            if(acomodacao.getTipoQuarto() == tipo){
+        for (Acomodacao acomodacao : acomodacoes) {
+            if (acomodacao.getTipoQuarto() == tipo) {
                 acomodacoesPorTipo.add(acomodacao);
             }
         }
         return acomodacoesPorTipo;
     }
+
+
 
 
     public boolean efetuarReserva(Reserva nova){
@@ -117,11 +119,19 @@ public class Hotel {
         return new Endereco(estado,cidade,rua,numero,bairro);
     };
 
-//    public Documento criarDocumento(String nome, String nomePai, String nomeMae, LocalDate dtNascimento,String naturalidade,LocalDate expedicao, String rg, String cpf){
-//        return new Rg(nome,nomePai,nomeMae,dtNascimento,naturalidade,expedicao,rg,cpf);
-//    }
-//    public Documento criarDocumento(String nome, String nomePai, String nomeMae, LocalDate dtnascimento,String naturalidade,LocalDate dtexpedicao, String number, String nacionalidade, LocalDate dtVencimento){
-//        return new Passaporte(nome,nomePai,nomeMae,dtnascimento,naturalidade,dtexpedicao,number,nacionalidade,dtVencimento);
-//    }
+    public ArrayList<Acomodacao> getTipoQuartosDisponiveis(){
+        ArrayList<Acomodacao> retorno = new ArrayList<>();
+
+        for (TipoQuarto c: TipoQuarto.values()){
+            try {
+                retorno.add(getAcomodacaoPorTipo(c));
+            }catch (RuntimeException e) {
+
+            }
+        }
+
+        return  retorno;
+    }
+
 
 }
