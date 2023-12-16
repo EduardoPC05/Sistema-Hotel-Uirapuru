@@ -8,8 +8,8 @@ public class Hospede extends Cliente {
     private Endereco endereco;
     private String telefone;
 
-    public Hospede(String nome, Documento documento, InfoLogin infoLogin, Endereco endereco, String telefone) {
-        super(nome, documento, infoLogin);
+    public Hospede(Cliente cliente, Endereco endereco, String telefone) {
+        super(cliente.getNome(), cliente.getDocumento(), cliente.getInfoLogin());
         this.endereco = endereco;
         this.telefone = telefone;
     }
