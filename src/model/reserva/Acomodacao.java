@@ -80,7 +80,7 @@ public class Acomodacao {
     public boolean verificaReserva(Reserva nova){
         if(!reservas.isEmpty()) {
             for (Reserva r : this.reservas){
-                if (r.getAcomodacao().getTipoQuarto() == nova.getAcomodacao().getTipoQuarto()){
+                if (r.getTipoQuarto() == nova.getTipoQuarto()){
                     return !r.getCheckIn().isBefore(nova.getCheckOut()) && !r.getCheckOut().isAfter(nova.getCheckIn());
                 }
             }
