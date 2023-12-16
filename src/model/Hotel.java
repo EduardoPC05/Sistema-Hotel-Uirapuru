@@ -1,6 +1,12 @@
 package src.model;
 
+import src.model.pessoa.Pessoa;
+import src.model.pessoa.clientes.Cliente;
+import src.model.pessoa.clientes.Hospede;
 import src.model.pessoa.documento.Documento;
+import src.model.pessoa.endereco.Endereco;
+import src.model.pessoa.funcionario.Funcionario;
+import src.model.pessoa.login.InfoLogin;
 import src.model.reserva.Acomodacao;
 import src.model.reserva.Reserva;
 import src.model.reserva.TipoQuarto;
@@ -78,7 +84,7 @@ public class Hotel {
 
 
     public boolean efetuarReserva(Reserva nova){
-        ArrayList<Acomodacao> acomodacoes = getAcomodacoesPorTipo(nova.getAcomodacao().getTipoQuarto());
+        ArrayList<Acomodacao> acomodacoes = getAcomodacoesPorTipo(nova.getTipoQuarto());
 
         for(Acomodacao acomodacao: acomodacoes) {
             if(acomodacao.verificaReserva(nova)){
@@ -103,12 +109,12 @@ public class Hotel {
     }
 
 
-    public Hospede criarHospedes(Documento doc,Endereco end,long tel,String senha, String email, Boolean principal){
-       return new Hospede(doc,end,tel, senha,email, principal);
+    public Hospede criarHospedes(String nome, Documento documento, InfoLogin infoLogin, Endereco endereco, String telefone){
+       return new Hospede(nome,documento,infoLogin,endereco,telefone);
     }
 
-    public Endereco criarEndereco(String estado,String cidade, String cep,String rua, String numRua, String bairro){
-        return new Endereco(estado,cidade,cep,rua,numRua,bairro);
+    public Endereco criarEndereco( String estado,String cidade,String rua,String numero,String bairro){
+        return new Endereco(estado,cidade,rua,numero,bairro);
     };
 
 //    public Documento criarDocumento(String nome, String nomePai, String nomeMae, LocalDate dtNascimento,String naturalidade,LocalDate expedicao, String rg, String cpf){
