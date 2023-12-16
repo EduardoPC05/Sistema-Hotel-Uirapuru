@@ -1,121 +1,49 @@
 package src.model.reserva;
 
 import src.model.pagamento.MetodosPagamento;
+import src.model.pessoa.clientes.Acompanhante;
+import src.model.pessoa.clientes.Hospede;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Reserva {
 
     private Hospede hospedePrincipal;
-    private ArrayList<Hospede> acompanhantes;
-    private Acomodacao acomodacao;
-    private ArrayList<ItemConsumido> consumacao;
-    private LocalDateTime chegada;
-    private LocalDateTime saida;
-    private LocalDateTime checkIn;
-    private LocalDateTime checkOut;
-    private double multa;
-    private double desconto;
-    private MetodosPagamento pagamento;
+    private ArrayList<Acompanhante> acompanhantes;
+    private LocalDate checkIn;
+    private LocalDate checkOut;
 
-    public Reserva(Hospede hospedePrincipal, Acomodacao acomodacao, LocalDateTime checkIn, LocalDateTime checkOut) {
+    public Reserva(Hospede hospedePrincipal, ArrayList<Acompanhante> acompanhantes, LocalDate checkIn, LocalDate checkOut) {
         this.hospedePrincipal = hospedePrincipal;
-        this.acomodacao = acomodacao;
+        this.acompanhantes = acompanhantes;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
-        this.acompanhantes = new ArrayList<Hospede>();
     }
 
-    public double calculaEstadia(LocalDateTime chegada, LocalDateTime saida){
-
-        double preco = acomodacao.getPrecoDiaria();
-        Duration duracao = Duration.between(saida, chegada);
-        return preco * duracao.toDays();
+    public void addAcompanhantes(Acompanhante acompanhante) {
+        acompanhantes.add(acompanhante);
     }
 
-    public double calculaConsumacao(){
-        double consumacao = 0;
-        //TODO
-        return consumacao;
-    }
-
-    public double calculaTotal(){
-        double total = 0;
-        //TODO
-        return total;
-    }
-
-    public void addAcompanhantes(Hospede hospede) {
-        acompanhantes.add(hospede);
-    }
-
-    public void removeAcompanhantes(Hospede hospede){
-        acompanhantes.remove(hospede);
-    }
-
-    public void setChegada(LocalDateTime chegada) {
-        this.chegada = chegada;
-    }
-
-    public void setSaida(LocalDateTime saida) {
-        this.saida = saida;
-    }
-
-    public void setMulta(double multa) {
-        this.multa = multa;
-    }
-
-    public void setDesconto(double desconto) {
-        this.desconto = desconto;
-    }
-
-    public void setPagamento(MetodosPagamento pagamento) {
-        this.pagamento = pagamento;
+    public void removeAcompanhantes(Acompanhante acompanhante){
+        acompanhantes.remove(acompanhante);
     }
 
     public Hospede getHospedePrincipal() {
         return hospedePrincipal;
     }
 
-    public ArrayList<Hospede> getAcompanhantes() {
+    public ArrayList<Acompanhante> getAcompanhantes() {
         return acompanhantes;
     }
 
-    public Acomodacao getAcomodacao() {
-        return acomodacao;
-    }
-
-    public ArrayList<ItemConsumido> getConsumacao() {
-        return consumacao;
-    }
-
-    public LocalDateTime getChegada() {
-        return chegada;
-    }
-
-    public LocalDateTime getSaida() {
-        return saida;
-    }
-
-    public double getMulta() {
-        return multa;
-    }
-
-    public double getDesconto() {
-        return desconto;
-    }
-
-    public LocalDateTime getCheckIn() {
+    public LocalDate getCheckIn() {
         return checkIn;
     }
 
-    public LocalDateTime getCheckOut() {
+    public LocalDate getCheckOut() {
         return checkOut;
-    }
-
-    public MetodosPagamento getPagamento() {
-        return pagamento;
     }
 }
