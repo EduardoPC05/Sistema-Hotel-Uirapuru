@@ -4,16 +4,12 @@ import src.model.pessoa.Endereco;
 import src.model.pessoa.Funcionario;
 import src.model.pessoa.Hospede;
 import src.model.pessoa.documento.Documento;
-import src.model.pessoa.documento.Passaporte;
-import src.model.pessoa.documento.Rg;
 import src.model.reserva.Acomodacao;
 import src.model.reserva.Reserva;
 import src.model.reserva.TipoQuarto;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Hotel {
     private ArrayList<Reserva> reversasAtivas;

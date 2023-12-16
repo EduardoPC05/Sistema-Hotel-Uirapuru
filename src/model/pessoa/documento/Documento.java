@@ -2,26 +2,21 @@ package src.model.pessoa.documento;
 
 import java.time.LocalDate;
 
-public abstract class Documento {
-
-    protected String nome;
+public class Documento {
     protected String nomePai;
     protected String nomeMae;
     protected LocalDate dataNascimento;
-    protected String naturalidade;
-    protected LocalDate dataExpedicao;
+    private String nacionalidade;
+    private String numeroDoc;
+    private TipoDocumento tipoDocumento;
 
-    public Documento(String nome, String nomePai, String nomeMae, LocalDate dataNascimento, String naturalidade, LocalDate dataExpedicao) {
-        this.nome = nome;
+    public Documento(String nomePai, String nomeMae, LocalDate dataNascimento, String nacionalidade, String numeroDoc, TipoDocumento tipoDocumento) {
         this.nomePai = nomePai;
         this.nomeMae = nomeMae;
         this.dataNascimento = dataNascimento;
-        this.naturalidade = naturalidade;
-        this.dataExpedicao = dataExpedicao;
-    }
-
-    public String getNome() {
-        return nome;
+        this.nacionalidade = nacionalidade;
+        this.numeroDoc = numeroDoc;
+        this.tipoDocumento = tipoDocumento;
     }
 
     public String getNomePai() {
@@ -36,14 +31,15 @@ public abstract class Documento {
         return dataNascimento;
     }
 
-    public String getNaturalidade() {
-        return naturalidade;
+    public String getNacionalidade() {
+        return nacionalidade;
     }
 
-    public LocalDate getDataExpedicao() {
-        return dataExpedicao;
+    public String getNumeroDoc() {
+        return numeroDoc;
     }
 
-    public abstract String getNumeroDocumento();
-
+    public TipoDocumento getTipoDocumento() {
+        return tipoDocumento;
+    }
 }

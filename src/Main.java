@@ -1,26 +1,21 @@
 package src;
 
 import src.model.Hotel;
-import src.model.pagamento.Boleto;
-import src.model.pagamento.MetodosPagamento;
 import src.model.pessoa.Endereco;
 import src.model.pessoa.Hospede;
 import src.model.pessoa.documento.Documento;
-import src.model.pessoa.documento.Rg;
-import src.model.reserva.Acomodacao;
 import src.model.reserva.Reserva;
 import src.model.reserva.TipoQuarto;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.ArrayList;
-import java.util.Random;
 
 public class Main {
 
     public static void main(String[] args) {
 
+        /*
         Hotel hotel = new Hotel();
 
         Endereco endereco = new Endereco("CE","Fortaleza","123123","Rua das avenidas","123","Bairro");
@@ -47,6 +42,6 @@ public class Main {
         System.out.println(hotel.efetuarReserva(reserva7));
 
         System.out.println(hotel.getAcomodacaoPorTipo(TipoQuarto.LUXO).getReservas().size());
-
+        */
     }
 }
