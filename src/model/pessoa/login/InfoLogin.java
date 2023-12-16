@@ -11,10 +11,6 @@ public class InfoLogin {
         this.tipoLogin = tipoLogin;
     }
 
-    public void setTipoLogin(TipoLogin tipoLogin) {
-        this.tipoLogin = tipoLogin;
-    }
-
     public String getEmail() {
         return email;
     }

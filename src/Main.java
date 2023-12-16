@@ -19,9 +19,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-
         Hotel hotel = new Hotel();
-
 
         Endereco endereco = new Endereco("CE","Fortaleza","123123","Rua das avenidas","123");
         Documento doc = new Documento("Eduardo", "Jucá", LocalDate.of(1999, Month.JANUARY, 1), "br", "123", TipoDocumento.CPF);
@@ -29,9 +27,6 @@ public class Main {
         InfoLogin tes = new InfoLogin("@teste","123", TipoLogin.ADMINISTRADOR);
 
         Hospede ed = new Hospede("Ed",doc,tes,endereco,"21243121");
-
-
-
 
         Acompanhante e1 = new Acompanhante("Au",doc);
 
@@ -43,21 +38,12 @@ public class Main {
         Reserva reserva3 = new Reserva(ed,a, TipoQuarto.LUXO,LocalDate.of(2011,Month.OCTOBER,20), LocalDate.of(2011,Month.OCTOBER,30));
         Reserva reserva4 = new Reserva(ed,a, TipoQuarto.LUXO,LocalDate.of(2011,Month.OCTOBER,20), LocalDate.of(2011,Month.OCTOBER,30));
 
-
-
-
-
-
-
-
         System.out.println(hotel.efetuarReserva(reserva));
         System.out.println(hotel.efetuarReserva(reserva2));
         System.out.println(hotel.efetuarReserva(reserva3));
         System.out.println(hotel.efetuarReserva(reserva4));
 
         System.out.println(hotel.getAcomodacaoPorTipo(TipoQuarto.LUXO).getReservas().size());
-
-
 
     }
 }

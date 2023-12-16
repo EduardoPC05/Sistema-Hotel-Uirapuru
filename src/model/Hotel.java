@@ -4,6 +4,7 @@ import src.model.pessoa.Pessoa;
 import src.model.pessoa.clientes.Cliente;
 import src.model.pessoa.clientes.Hospede;
 import src.model.pessoa.documento.Documento;
+import src.model.pessoa.documento.TipoDocumento;
 import src.model.pessoa.endereco.Endereco;
 import src.model.pessoa.funcionario.Funcionario;
 import src.model.pessoa.login.InfoLogin;
@@ -108,7 +109,6 @@ public class Hotel {
        return this.reversasAtivas.remove(excluir);
     }
 
-
     public Hospede criarHospedes(String nome, Documento documento, InfoLogin infoLogin, Endereco endereco, String telefone){
        return new Hospede(nome,documento,infoLogin,endereco,telefone);
     }
@@ -117,11 +117,8 @@ public class Hotel {
         return new Endereco(estado,cidade,rua,numero,bairro);
     };
 
-//    public Documento criarDocumento(String nome, String nomePai, String nomeMae, LocalDate dtNascimento,String naturalidade,LocalDate expedicao, String rg, String cpf){
-//        return new Rg(nome,nomePai,nomeMae,dtNascimento,naturalidade,expedicao,rg,cpf);
-//    }
-//    public Documento criarDocumento(String nome, String nomePai, String nomeMae, LocalDate dtnascimento,String naturalidade,LocalDate dtexpedicao, String number, String nacionalidade, LocalDate dtVencimento){
-//        return new Passaporte(nome,nomePai,nomeMae,dtnascimento,naturalidade,dtexpedicao,number,nacionalidade,dtVencimento);
-//    }
+    public Documento criarDocumento(String nomePai, String nomeMae, LocalDate dtNascimento, String nacionalidade, String numeroDoc, TipoDocumento tipoDocumento){
+        return new Documento(nomePai, nomeMae, dtNascimento, nacionalidade, numeroDoc, tipoDocumento);
+    }
 
 }
