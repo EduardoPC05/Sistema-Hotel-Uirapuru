@@ -5,6 +5,7 @@ import src.model.pessoa.clientes.Cliente;
 import src.model.pessoa.clientes.Hospede;
 import src.model.pessoa.endereco.Endereco;
 import src.model.pessoa.funcionario.Funcionario;
+import src.model.pessoa.login.TipoLogin;
 import src.model.reserva.Acomodacao;
 import src.model.reserva.Reserva;
 import src.model.reserva.TipoQuarto;
@@ -161,6 +162,26 @@ public class Hotel {
             }
         }
         return retorno;
+    }
+
+    public TipoLogin verificaLogin(String email, String senha){
+        for(Acomodacao a : acomodacoes){
+            for(Reserva r : a.getReservas()){
+                if(r.getHospedePrincipal().getInfoLogin().getEmail().equals(email)){
+                    if(r.getHospedePrincipal().getInfoLogin().getSenha().equals(senha)){
+                        return r.getHospedePrincipal().getInfoLogin().getTipoLogin();
+                    }
+                }
+            }
+        }
+        for(Funcionario f : funcionarios){
+            if(f.getInfoLogin().getEmail().equals(email)){
+                if(f.getInfoLogin().getSenha().equals(senha)){
+                    return f.getInfoLogin().getTipoLogin();
+                }
+            }
+        }
+        return null;
     }
 
 
