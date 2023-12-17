@@ -1,5 +1,6 @@
 package src.model;
 
+import src.model.pessoa.clientes.Acompanhante;
 import src.model.pessoa.clientes.Cliente;
 import src.model.pessoa.clientes.Hospede;
 import src.model.pessoa.endereco.Endereco;
@@ -8,6 +9,7 @@ import src.model.reserva.Acomodacao;
 import src.model.reserva.Reserva;
 import src.model.reserva.TipoQuarto;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Hotel {
@@ -71,8 +73,9 @@ public class Hotel {
         return acomodacoesPorTipo;
     }
 
-
-
+    public Reserva criarReserva(Cliente hospedePrincipal, ArrayList<Acompanhante> acompanhantes, TipoQuarto tipoQuarto, LocalDate checkIn, LocalDate checkOut){
+        return new Reserva(hospedePrincipal, acompanhantes, tipoQuarto, checkIn, checkOut);
+    }
 
     public boolean efetuarReserva(Reserva nova){
         ArrayList<Acomodacao> acomodacoes = getAcomodacoesPorTipo(nova.getTipoQuarto());
