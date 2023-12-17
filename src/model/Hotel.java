@@ -10,7 +10,9 @@ import src.model.reserva.Reserva;
 import src.model.reserva.TipoQuarto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Hotel {
     private ArrayList<Reserva> reversasAtivas;
@@ -127,6 +129,38 @@ public class Hotel {
         }
 
         return  retorno;
+    }
+
+    public boolean efetuarCheckIn(Reserva reserva, Endereco endereco, String telefone, LocalDateTime chegada){
+        if(reserva.getHospedePrincipal() instanceof Hospede == false){
+            if(chegada.isAfter(reserva.getCheckIn()) && chegada.isBefore(reserva.getCheckOut())){
+                Hospede hospede = new Hospede(reserva.getHospedePrincipal(), endereco, telefone);
+                reserva.setHospedePrincipal(hospede);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean efetuarCheckOut(Reserva reserva){
+        if(reserva.getReservaAtiva()){
+            Cliente cliente = new Cliente(reserva.getHospedePrincipal().getNome(),reserva.getHospedePrincipal().getDocumento(), reserva.getHospedePrincipal().getInfoLogin());
+            reserva.setHospedePrincipal(cliente);
+            return true;
+        }
+        return false;
+    }
+
+    public ArrayList<Reserva> getReservasAtivas(){
+        ArrayList<Reserva> retorno = new ArrayList<>();
+        for(Acomodacao a : acomodacoes){
+            for(Reserva r : a.getReservas()){
+                if(r.getReservaAtiva()){
+                    retorno.add(r);
+                }
+            }
+        }
+        return retorno;
     }
 
 

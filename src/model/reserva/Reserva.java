@@ -59,4 +59,16 @@ public class Reserva {
     public LocalDateTime getCheckOut() {
         return checkOut;
     }
+
+    public void setHospedePrincipal(Cliente hospedePrincipal) {
+        this.hospedePrincipal = hospedePrincipal;
+    }
+
+    public boolean getReservaAtiva(){
+        if (hospedePrincipal instanceof Hospede){
+            return true;
+        }
+        return false;
+    }
+
 }
