@@ -43,6 +43,9 @@ public class Hotel {
         //Fazer verificações referentes a debitos;
         return removeAcomodacao(quarto);
     }
+    public boolean removerAcomodacao(String codigo){
+        return this.acomodacoes.removeIf(i -> i.getCodigo().equals(codigo));
+    }
     public Acomodacao getAcomodacaoPorTipo(TipoQuarto tipoQuarto){
         for (Acomodacao acomodacao: acomodacoes) {
             if(acomodacao.getTipoQuarto() == tipoQuarto){
@@ -50,9 +53,6 @@ public class Hotel {
             }
         }
        return null;
-    }
-    public boolean removeAcomodacao(String codigo){
-        return this.acomodacoes.removeIf(i -> i.getCodigo().equals(codigo));
     }
     private boolean addAcomodacao(Acomodacao quarto){
         return this.acomodacoes.add(quarto);
@@ -87,19 +87,25 @@ public class Hotel {
         return false;
     }
 
-    public boolean excluirReserva(Reserva excluir){
-        //TODO
-        /*
-        * Fazer verificações sobre debitos e outros(pessoa)
-        * */
-        return removeReserva(excluir);
+    public boolean excluirReserva(String email){
+        return removeReserva(getReservas(email).getLast());
     }
 
     private boolean removeReserva(Reserva excluir){
        return this.reversasAtivas.remove(excluir);
     }
 
-
+    public ArrayList<Reserva> getReservas(String email){
+        ArrayList<Reserva> reservasUsuario = new ArrayList<>();
+        for (Acomodacao rs: acomodacoes){
+            for (Reserva r: rs.getReservas()){
+                if (r.getHospedePrincipal().getInfoLogin().getEmail().equals(email)){
+                    reservasUsuario.add(r);
+                }
+            }
+        }
+        return reservasUsuario;
+    }
     public Hospede criarHospedes(Cliente cliente,Endereco endereco, String telefone){
        return new Hospede(cliente,endereco,telefone);
     }

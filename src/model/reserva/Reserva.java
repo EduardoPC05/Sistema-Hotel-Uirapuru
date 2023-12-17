@@ -32,8 +32,12 @@ public class Reserva {
         acompanhantes.add(acompanhante);
     }
 
-    public void removeAcompanhantes(Acompanhante acompanhante){
-        acompanhantes.remove(acompanhante);
+    public void removeAcompanhantes(String nome){
+        for (Acompanhante ac : acompanhantes){
+            if (ac.getNome() == nome){
+                acompanhantes.remove(ac);
+            }
+        }
     }
 
     public TipoQuarto getTipoQuarto() {
