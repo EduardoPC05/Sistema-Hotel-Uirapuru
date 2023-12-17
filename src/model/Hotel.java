@@ -3,6 +3,8 @@ package src.model;
 import src.model.pessoa.clientes.Acompanhante;
 import src.model.pessoa.clientes.Cliente;
 import src.model.pessoa.clientes.Hospede;
+import src.model.pessoa.documento.Documento;
+import src.model.pessoa.documento.InfosBasicas;
 import src.model.pessoa.endereco.Endereco;
 import src.model.pessoa.funcionario.Funcionario;
 import src.model.pessoa.login.TipoLogin;
@@ -76,8 +78,8 @@ public class Hotel {
         return acomodacoesPorTipo;
     }
 
-    public Reserva criarReserva(Cliente hospedePrincipal, ArrayList<Acompanhante> acompanhantes, TipoQuarto tipoQuarto, LocalDate checkIn, LocalDate checkOut){
-        return new Reserva(hospedePrincipal, acompanhantes, tipoQuarto, checkIn, checkOut);
+    public Reserva criarReserva(Cliente hospedePrincipal, int qtdAcompanhantes, TipoQuarto tipoQuarto, LocalDate checkIn, LocalDate checkOut){
+        return new Reserva(hospedePrincipal, qtdAcompanhantes, tipoQuarto, checkIn, checkOut);
     }
 
     public boolean efetuarReserva(Reserva nova){
@@ -132,9 +134,19 @@ public class Hotel {
         return  retorno;
     }
 
-    public boolean efetuarCheckIn(Reserva reserva, Endereco endereco, String telefone, LocalDateTime chegada){
+    private Boolean adicionarDocumento(Reserva reserva, Documento documento){
+        Documento doc = new Documento(reserva.getHospedePrincipal().getInfosBasicas(), documento.getNomePai(), documento.getNomeMae(), documento.getDataNascimento(), documento.getNacionalidade());
+        reserva.getHospedePrincipal().setInfosBasicas(doc);
+        if(reserva.getHospedePrincipal().hasDocumento(reserva.getHospedePrincipal().getInfosBasicas())){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean efetuarCheckIn(Reserva reserva, Endereco endereco, Documento documento,String telefone, LocalDateTime chegada){
         if(reserva.getHospedePrincipal() instanceof Hospede == false){
             if(chegada.isAfter(reserva.getCheckIn()) && chegada.isBefore(reserva.getCheckOut())){
+                adicionarDocumento(reserva, documento);
                 Hospede hospede = new Hospede(reserva.getHospedePrincipal(), endereco, telefone);
                 reserva.setHospedePrincipal(hospede);
                 return true;
@@ -143,9 +155,17 @@ public class Hotel {
         return false;
     }
 
+    private Acompanhante criarAcompanhante(String nome, InfosBasicas infos){
+        return new Acompanhante(nome, infos);
+    }
+
+    public void cadastrarAcompanhante(Reserva reserva, String nome, InfosBasicas infos){
+        reserva.addAcompanhantes(criarAcompanhante(nome, infos));
+    }
+
     public boolean efetuarCheckOut(Reserva reserva){
         if(reserva.getReservaAtiva()){
-            Cliente cliente = new Cliente(reserva.getHospedePrincipal().getNome(),reserva.getHospedePrincipal().getDocumento(), reserva.getHospedePrincipal().getInfoLogin());
+            Cliente cliente = new Cliente(reserva.getHospedePrincipal().getNome(),reserva.getHospedePrincipal().getInfosBasicas(), reserva.getHospedePrincipal().getInfoLogin());
             reserva.setHospedePrincipal(cliente);
             return true;
         }

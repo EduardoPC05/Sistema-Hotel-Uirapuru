@@ -2,10 +2,11 @@ package src.model.pessoa.clientes;
 
 import src.model.pessoa.Pessoa;
 import src.model.pessoa.documento.Documento;
+import src.model.pessoa.documento.InfosBasicas;
 
 public class Acompanhante extends Pessoa {
-    public Acompanhante(String nome, Documento documento) {
-        super(nome, documento);
+    public Acompanhante(String nome, InfosBasicas infos) {
+        super(nome, infos);
     }
 
     @Override
@@ -14,7 +15,7 @@ public class Acompanhante extends Pessoa {
     }
 
     @Override
-    public Documento getDocumento() {
-        return super.getDocumento();
+    public InfosBasicas getInfosBasicas() {
+        return super.getInfosBasicas();
     }
 }

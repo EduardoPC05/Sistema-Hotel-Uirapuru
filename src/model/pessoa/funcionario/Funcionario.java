@@ -2,6 +2,7 @@ package src.model.pessoa.funcionario;
 
 import src.model.pessoa.Pessoa;
 import src.model.pessoa.documento.Documento;
+import src.model.pessoa.documento.InfosBasicas;
 import src.model.pessoa.login.InfoLogin;
 import src.model.reserva.Reserva;
 
@@ -33,7 +34,7 @@ public class Funcionario extends Pessoa {
     }
 
     @Override
-    public Documento getDocumento() {
-        return super.getDocumento();
+    public InfosBasicas getInfosBasicas() {
+        return super.getInfosBasicas();
     }
 }
