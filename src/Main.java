@@ -13,6 +13,7 @@ import src.model.pessoa.login.TipoLogin;
 import src.model.reserva.Acomodacao;
 import src.model.reserva.Reserva;
 import src.model.reserva.TipoQuarto;
+import src.model.reserva.pagamento.TipoPagamento;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -46,6 +47,8 @@ public class Main {
 
         System.out.println(hotel.efetuarCheckIn(reserva, endereco, doc,"98765", LocalDateTime.of(2011, Month.OCTOBER, 20, 10, 0, 0)));
         System.out.println(reserva.getHospedePrincipal().hasDocumento(reserva.getHospedePrincipal().getInfosBasicas()));
+        System.out.println((hotel.efetuarCheckOut(reserva, TipoPagamento.BOLETO,LocalDateTime.of(2011, Month.OCTOBER, 30, 11, 0, 0))));
+        System.out.println(reserva.getPrecoEstadia());
 //        System.out.println(hotel.verificaLogin("@teste", "123"));
 
 //        System.out.println(hotel.getAcomodacaoPorTipo(TipoQuarto.LUXO).getReservas().size());

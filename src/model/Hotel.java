@@ -11,6 +11,7 @@ import src.model.pessoa.login.TipoLogin;
 import src.model.reserva.Acomodacao;
 import src.model.reserva.Reserva;
 import src.model.reserva.TipoQuarto;
+import src.model.reserva.pagamento.TipoPagamento;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -146,6 +147,7 @@ public class Hotel {
     public boolean efetuarCheckIn(Reserva reserva, Endereco endereco, Documento documento,String telefone, LocalDateTime chegada){
         if(reserva.getHospedePrincipal() instanceof Hospede == false){
             if(chegada.isAfter(reserva.getCheckIn()) && chegada.isBefore(reserva.getCheckOut())){
+                reserva.setHorarioChegada(chegada);
                 adicionarDocumento(reserva, documento);
                 Hospede hospede = new Hospede(reserva.getHospedePrincipal(), endereco, telefone);
                 reserva.setHospedePrincipal(hospede);
@@ -163,13 +165,29 @@ public class Hotel {
         reserva.addAcompanhantes(criarAcompanhante(nome, infos));
     }
 
-    public boolean efetuarCheckOut(Reserva reserva){
+    public boolean efetuarCheckOut(Reserva reserva, TipoPagamento tipoPagamento, LocalDateTime saida){
         if(reserva.getReservaAtiva()){
             Cliente cliente = new Cliente(reserva.getHospedePrincipal().getNome(),reserva.getHospedePrincipal().getInfosBasicas(), reserva.getHospedePrincipal().getInfoLogin());
+            reserva.setTipoPagamento(tipoPagamento);
             reserva.setHospedePrincipal(cliente);
+            reserva.setHorarioSaida(saida);
             return true;
         }
         return false;
+    }
+
+    public void efetuarPagamento(Reserva reserva, String nome, String numero, int cvv, int mesValidade, int anoValidade){
+        reserva.setPagamentoCartao(nome, numero, cvv, mesValidade, anoValidade);
+    }
+
+    public void efetuarPagamento(Reserva reserva, double valor){
+        LocalDate dataValidade =  reserva.getCheckOut().toLocalDate();
+        dataValidade.plusDays(30);
+        reserva.setPagamentoBoleto(dataValidade, valor);
+    }
+
+    public void efetuarPagamento(Reserva reserva, String nomeBeneficiario){
+        reserva.setPagamentoCheque(nomeBeneficiario);
     }
 
     public ArrayList<Reserva> getReservasAtivas(){
