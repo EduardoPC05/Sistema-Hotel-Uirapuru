@@ -15,9 +15,11 @@ import src.model.reserva.Reserva;
 import src.model.reserva.TipoQuarto;
 import src.model.reserva.pagamento.TipoPagamento;
 
+import javax.print.Doc;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,7 +59,7 @@ public class Hotel {
         efetuarReserva(reserva); // reserva efetuada
 
         efetuarCheckIn(reserva, endereco, doc,"98765", LocalDateTime.of(2011, Month.OCTOBER, 20, 10, 0, 0));
-        efetuarCheckOut(reserva, TipoPagamento.BOLETO,LocalDateTime.of(2011, Month.OCTOBER, 30, 11, 0, 0));
+        //efetuarCheckOut(reserva, TipoPagamento.BOLETO,LocalDateTime.of(2011, Month.OCTOBER, 30, 11, 0, 0));
 
         this.funcionarios = new ArrayList<Funcionario>();
 
@@ -86,6 +88,11 @@ public class Hotel {
         }
        return null;
     }
+
+    public ArrayList<Acomodacao> getAcomodacoes() {
+        return acomodacoes;
+    }
+
     private boolean addAcomodacao(Acomodacao quarto){
         return this.acomodacoes.add(quarto);
     }
@@ -160,8 +167,24 @@ public class Hotel {
         }
         return reservasUsuario;
     }
+
+    public InfosBasicas getInfosPorEmail(String email){
+        Reserva reserva;
+        for (Acomodacao rs: acomodacoes){
+            for (Reserva r: rs.getReservas()){
+                if (r.getHospedePrincipal().getInfoLogin().getEmail().equals(email)){
+                    return r.getHospedePrincipal().getInfosBasicas();
+                }
+            }
+        }
+        return null;
+    }
     public Hospede criarHospedes(Cliente cliente,Endereco endereco, String telefone){
        return new Hospede(cliente,endereco,telefone);
+    }
+
+    public Documento criarDocumento(InfosBasicas infos, String nomePai, String nomeMae, LocalDate nascimento, String nacionalidade){
+        return new Documento(infos, nomePai, nomeMae, nascimento, nacionalidade);
     }
 
     public Endereco criarEndereco( String estado,String cidade,String rua,String numero,String bairro){
@@ -229,7 +252,20 @@ public class Hotel {
         reserva.setPagamentoCartao(nome, numero, cvv, mesValidade, anoValidade);
     }
 
-    public void efetuarPagamento(Reserva reserva, double valor){
+    public void efetuarPagamento(Reserva reserva){
+        String email = reserva.getHospedePrincipal().getInfoLogin().getEmail();
+        Acomodacao acomodacao = null;
+        double valor = 0;
+
+        for(Acomodacao a : acomodacoes){
+            for(Reserva r: a.getReservas()){
+                if(r.getHospedePrincipal().getInfoLogin().getEmail().equals(email)){
+                    acomodacao = a;
+                }
+            }
+        }
+
+        valor = reserva.getPrecoEstadia(acomodacao);
         LocalDate dataValidade =  reserva.getCheckOut().toLocalDate();
         dataValidade.plusDays(30);
         reserva.setPagamentoBoleto(dataValidade, valor);
@@ -237,6 +273,15 @@ public class Hotel {
 
     public void efetuarPagamento(Reserva reserva, String nomeBeneficiario){
         reserva.setPagamentoCheque(nomeBeneficiario);
+    }
+
+    public String gerarBoleto(double valor, LocalDate dataValidade){
+        LocalDate dataBase = LocalDate.of(1997, 10,7);
+        long data = ChronoUnit.DAYS.between(dataBase, dataValidade.plusDays(30));
+        valor = valor*100;
+        long preco = (long) (valor / Math.pow(10, 10));
+        String retorno = String.format("%04d%010d", data, preco);
+        return retorno;
     }
 
     public ArrayList<Reserva> getReservasAtivas(){

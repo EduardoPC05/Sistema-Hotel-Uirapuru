@@ -25,6 +25,7 @@ public class Reserva {
     private double precoDiaria;
     private MetodoPagamento pagamento;
     private TipoPagamento tipoPagamento;
+    private int contasAPagar;
 
 
 
@@ -40,6 +41,7 @@ public class Reserva {
         this.tipoPagamento = null;
         this.horarioChegada = null;
         this.horarioSaida = null;
+        this.contasAPagar = 0;
 
     }
 
@@ -144,20 +146,38 @@ public class Reserva {
         return retorno;
     }
 
+    public int getContasAPagar() {
+        return contasAPagar;
+    }
+
     public void setPagamentoCartao(String nome, String numero, int cvv, int mesValidade, int anoValidade) {
         this.pagamento = new Cartao(nome, numero, cvv, mesValidade, anoValidade);
+        contasAPagar = 0;
     }
 
     public void setPagamentoBoleto(LocalDate dataValidade, double valor) {
         this.pagamento = new Boleto(dataValidade, valor);
+        contasAPagar = 0;
     }
 
     public void setPagamentoCheque(String nomeBeneficiario) {
         this.pagamento = new Cheque(nomeBeneficiario);
+        contasAPagar = 0;
     }
 
     public void setTipoPagamento(TipoPagamento tipoPagamento) {
         this.tipoPagamento = tipoPagamento;
+        switch (tipoPagamento){
+            case CARTAO:
+                contasAPagar = 1;
+                break;
+            case BOLETO:
+                contasAPagar = 2;
+                break;
+            case CHEQUE:
+                contasAPagar = 3;
+                break;
+        }
     }
 
     public void setPrecoDiaria(double precoDiaria) {
