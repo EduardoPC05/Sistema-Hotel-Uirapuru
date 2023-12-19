@@ -63,8 +63,10 @@ public class Hotel {
 
         this.funcionarios = new ArrayList<Funcionario>();
 
-        Funcionario rob = new Funcionario("roberto",doc, criarLogin("@func", "123", TipoLogin.FUNCIONARIO),reserva);
-        addFuncionarios(rob);
+        Funcionario rob = criarFuncionario("roberto",doc, criarLogin("@func", "123", TipoLogin.FUNCIONARIO));
+        Funcionario adm = criarFuncionario("Admin", criarDocumento(criarInfosBasicas(TipoDocumento.CPF, "123456789")
+                ,"admPai", "admMae", LocalDate.of(1960, 05, 10),"BR"),
+                criarLogin("@admin", "123", TipoLogin.ADMINISTRADOR));
 
     }
 
@@ -112,6 +114,12 @@ public class Hotel {
 
     public Cliente criarCliente(String nome, InfosBasicas infos, InfoLogin infoLogin){
         return new Cliente(nome, infos, infoLogin);
+    }
+
+    public Funcionario criarFuncionario(String nome, Documento doc, InfoLogin infoLogin){
+        Funcionario func = new Funcionario(nome, doc, infoLogin);
+        addFuncionarios(func);
+        return func;
     }
 
     public InfosBasicas criarInfosBasicas(TipoDocumento tipoDocumento, String numeroDocumento){
