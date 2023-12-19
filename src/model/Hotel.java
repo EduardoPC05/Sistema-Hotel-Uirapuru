@@ -22,6 +22,7 @@ import java.time.Month;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Hotel {
     private ArrayList<Reserva> reversasAtivas;
@@ -64,15 +65,17 @@ public class Hotel {
         this.funcionarios = new ArrayList<Funcionario>();
 
         Funcionario rob = criarFuncionario("roberto",doc, criarLogin("@func", "123", TipoLogin.FUNCIONARIO));
+        addFuncionarios(rob);
         Funcionario adm = criarFuncionario("Admin", criarDocumento(criarInfosBasicas(TipoDocumento.CPF, "123456789")
                 ,"admPai", "admMae", LocalDate.of(1960, 05, 10),"BR"),
                 criarLogin("@admin", "123", TipoLogin.ADMINISTRADOR));
+        addFuncionarios(adm);
 
     }
 
     public boolean criarAcomodacao(String andar, String num, String descricao, TipoQuarto tipoQ){
         Acomodacao quarto = new Acomodacao(andar,num,descricao,tipoQ);
-         return addAcomodacao(quarto);
+        return addAcomodacao(quarto);
     }
     public boolean removerAcomodacao(Acomodacao quarto){
         //TODO
@@ -89,6 +92,17 @@ public class Hotel {
             }
         }
        return null;
+    }
+
+    public ArrayList<Funcionario> getFuncionarios() {
+        return funcionarios;
+    }
+
+    public Funcionario removeFuncionario(int index){
+        if(funcionarios.get(index).getInfoLogin().getTipoLogin() == TipoLogin.FUNCIONARIO){
+            return funcionarios.remove(index);
+        }
+        return null;
     }
 
     public ArrayList<Acomodacao> getAcomodacoes() {
@@ -118,7 +132,7 @@ public class Hotel {
 
     public Funcionario criarFuncionario(String nome, Documento doc, InfoLogin infoLogin){
         Funcionario func = new Funcionario(nome, doc, infoLogin);
-        addFuncionarios(func);
+        //addFuncionarios(func);
         return func;
     }
 
@@ -246,12 +260,14 @@ public class Hotel {
     }
 
     public boolean efetuarCheckOut(Reserva reserva, TipoPagamento tipoPagamento, LocalDateTime saida){
-        if(reserva.getReservaAtiva()){
-            Cliente cliente = new Cliente(reserva.getHospedePrincipal().getNome(),reserva.getHospedePrincipal().getInfosBasicas(), reserva.getHospedePrincipal().getInfoLogin());
-            reserva.setTipoPagamento(tipoPagamento);
-            reserva.setHospedePrincipal(cliente);
-            reserva.setHorarioSaida(saida);
-            return true;
+        if(reserva.getHospedePrincipal() instanceof Hospede == true) {
+            if (reserva.getReservaAtiva()) {
+                Cliente cliente = new Cliente(reserva.getHospedePrincipal().getNome(), reserva.getHospedePrincipal().getInfosBasicas(), reserva.getHospedePrincipal().getInfoLogin());
+                reserva.setTipoPagamento(tipoPagamento);
+                reserva.setHospedePrincipal(cliente);
+                reserva.setHorarioSaida(saida);
+                return true;
+            }
         }
         return false;
     }
@@ -284,12 +300,35 @@ public class Hotel {
     }
 
     public String gerarBoleto(double valor, LocalDate dataValidade){
-        LocalDate dataBase = LocalDate.of(1997, 10,7);
-        long data = ChronoUnit.DAYS.between(dataBase, dataValidade.plusDays(30));
-        valor = valor*100;
-        long preco = (long) (valor / Math.pow(10, 10));
-        String retorno = String.format("%04d%010d", data, preco);
-        return retorno;
+//        LocalDate dataBase = LocalDate.of(1997, 10,7);
+//        long data = ChronoUnit.DAYS.between(dataBase, dataValidade.plusDays(30));
+//        valor = valor*100;
+//        String v =  valor+"";
+//        String d = data+"";
+//
+//        for(int i = 0; i < 14 - (v.length() + d.length()); i++){
+//            d += "0";
+//        }
+//
+//        return d + v.format(".0f");
+
+        LocalDate dataBase = LocalDate.of(1997, 10, 7);
+        long dias = ChronoUnit.DAYS.between(dataBase, dataValidade) + 30;
+
+        // Formata o valor do boleto (sem vírgula e sem centavos) para garantir 10 dígitos
+        String valorFormatado = String.format("%010.0f", valor * 100); // Ajustado para garantir 10 dígitos
+
+        // Formata os dias para garantir 14 dígitos
+        String diasFormatados = String.format("%4d", dias);
+
+        // Remove zeros à esquerda
+        String codigoBoleto = (diasFormatados + valorFormatado);//.replaceFirst("^0+", "");
+
+        // Adiciona zero no meio
+        int length = codigoBoleto.length();
+        codigoBoleto = codigoBoleto.substring(0, length / 2) + codigoBoleto.substring(length / 2);
+
+        return codigoBoleto;
     }
 
     public ArrayList<Reserva> getReservasAtivas(){

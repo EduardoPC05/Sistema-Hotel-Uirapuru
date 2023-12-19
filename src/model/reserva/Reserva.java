@@ -44,7 +44,7 @@ public class Reserva {
         this.tipoQuarto = tipoQuarto;
         this.checkIn = LocalDateTime.of(checkIn,LocalTime.of(9,0,0)); // Horário minimo para dar entrada no hotel
         this.checkOut = LocalDateTime.of(checkOut,LocalTime.of(12,0,0)); // Horário maximo para sair do hotel
-        this.acompanhantes = null;
+        this.acompanhantes = new ArrayList<>();
         this.pagamento = new MetodoPagamento();
         this.tipoPagamento = null;
         this.horarioChegada = null;
