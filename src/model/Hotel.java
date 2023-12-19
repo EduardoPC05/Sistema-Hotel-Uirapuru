@@ -36,13 +36,12 @@ public class Hotel {
         // DADOS MOCKADOS
 
         Acomodacao teste = new Acomodacao("12","12","ELE È BOM DMS", TipoQuarto.LUXO);
-       // Acomodacao teste1 = new Acomodacao("12","33","ELE È BOM DMS", TipoQuarto.LUXO);
         Acomodacao teste2 = new Acomodacao("12","44","ELE È BOM DMS", TipoQuarto.NORMAL);
         Acomodacao teste3 = new Acomodacao("12","44","ELE È BOM DMS", TipoQuarto.SUITE);
 
         this.acomodacoes = new ArrayList<Acomodacao>();
+
         acomodacoes.add(teste);
-        //acomodacoes.add(teste1);
         acomodacoes.add(teste2);
         acomodacoes.add(teste3);
 
@@ -60,16 +59,16 @@ public class Hotel {
         efetuarReserva(reserva); // reserva efetuada
 
         efetuarCheckIn(reserva, endereco, doc,"98765", LocalDateTime.of(2011, Month.OCTOBER, 20, 10, 0, 0));
-        //efetuarCheckOut(reserva, TipoPagamento.BOLETO,LocalDateTime.of(2011, Month.OCTOBER, 30, 11, 0, 0));
 
         this.funcionarios = new ArrayList<Funcionario>();
-
-        Funcionario rob = criarFuncionario("roberto",doc, criarLogin("@func", "123", TipoLogin.FUNCIONARIO));
-        addFuncionarios(rob);
+        
         Funcionario adm = criarFuncionario("Admin", criarDocumento(criarInfosBasicas(TipoDocumento.CPF, "123456789")
                 ,"admPai", "admMae", LocalDate.of(1960, 05, 10),"BR"),
                 criarLogin("@admin", "123", TipoLogin.ADMINISTRADOR));
         addFuncionarios(adm);
+
+        Funcionario rob = criarFuncionario("roberto",doc, criarLogin("@func", "123", TipoLogin.FUNCIONARIO));
+        addFuncionarios(rob);
 
     }
 
