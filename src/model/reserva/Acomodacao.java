@@ -11,6 +11,7 @@ public class Acomodacao {
     private String descricao;
     private TipoQuarto tipoQuarto;
     private ArrayList<Reserva> reservas;
+    private double precoDiaria;
     private int limiteAdultos;
 
     private int limiteCriancas;
@@ -24,9 +25,22 @@ public class Acomodacao {
         this.reservas = new ArrayList<Reserva>();
         setCodigo(andar, numero);
         setQtdpessoas(tipoQuarto);
+        setPrecoDiaria();
     }
 
-
+    private void setPrecoDiaria(){
+        switch (tipoQuarto){
+            case NORMAL:
+                precoDiaria = 100.00;
+                break;
+            case SUITE:
+                precoDiaria = 150.00;
+                break;
+            case LUXO:
+                precoDiaria = 250.00;
+                break;
+        }
+    }
 
     private void setQtdpessoas(TipoQuarto tipoQuarto){
         switch (tipoQuarto){
@@ -72,6 +86,9 @@ public class Acomodacao {
     public TipoQuarto getTipoQuarto() {
         return tipoQuarto;
     }
+    public double getPrecoDiaria() {
+        return precoDiaria;
+    }
 
     public int getLimiteAdultos() {
         return limiteAdultos;
@@ -91,8 +108,9 @@ public class Acomodacao {
     public boolean verificaReserva(Reserva nova){
         if(!reservas.isEmpty()) {
             for (Reserva r : this.reservas){
-                if (r.getTipoQuarto() == nova.getTipoQuarto()){
-                    return !r.getCheckIn().isBefore(nova.getCheckOut()) && !r.getCheckOut().isAfter(nova.getCheckIn());
+                if (r.getCheckIn().isBefore(nova.getCheckOut()) &&
+                        r.getCheckOut().isAfter(nova.getCheckIn())) {
+                    return false;
                 }
             }
         }

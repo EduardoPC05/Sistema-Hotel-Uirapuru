@@ -40,7 +40,6 @@ public class Reserva {
         this.tipoPagamento = null;
         this.horarioChegada = null;
         this.horarioSaida = null;
-        calculaPrecoDiaria(tipoQuarto);
 
     }
 
@@ -101,6 +100,10 @@ public class Reserva {
         return tipoPagamento;
     }
 
+    public double getPrecoDiaria(Acomodacao acomodacao) {
+        return acomodacao.getPrecoDiaria();
+    }
+
     public LocalDateTime getHorarioChegada() {
         return horarioChegada;
     }
@@ -109,22 +112,36 @@ public class Reserva {
         return horarioSaida;
     }
 
-    public double getPrecoEstadia(){
+    public double getPrecoEstadia(Acomodacao acomodacao){
         if(getHorarioChegada() != null && getHorarioSaida() != null){
             long retorno = ChronoUnit.DAYS.between(getHorarioChegada(), getHorarioSaida());
             long periodoCorreto = ChronoUnit.DAYS.between(getCheckIn(), getCheckOut());
+            double valor = 0;
             if(retorno > periodoCorreto){
-                long plus = ChronoUnit.DAYS.between(getHorarioSaida(), getCheckOut());
-                retorno += plus;
+                valor = retorno;
+            }else {
+                valor = periodoCorreto;
             }
-            double valor = retorno * getPrecoDiaria();
+            valor *= getPrecoDiaria(acomodacao);
             return valor;
         }
         return -1;
     }
 
-    public double getPrecoDiaria() {
-        return precoDiaria;
+    public double getPrecoPorTipo(TipoQuarto tipoQuarto){
+        double retorno  = 0;
+        switch (tipoQuarto){
+            case NORMAL:
+                retorno = 100.00;
+                break;
+            case SUITE:
+                retorno = 150.00;
+                break;
+            case LUXO:
+                retorno = 250.00;
+                break;
+        }
+        return retorno;
     }
 
     public void setPagamentoCartao(String nome, String numero, int cvv, int mesValidade, int anoValidade) {
@@ -143,6 +160,10 @@ public class Reserva {
         this.tipoPagamento = tipoPagamento;
     }
 
+    public void setPrecoDiaria(double precoDiaria) {
+        this.precoDiaria = precoDiaria;
+    }
+
     public void setHorarioChegada(LocalDateTime horarioChegada) {
         this.horarioChegada = horarioChegada;
     }
@@ -151,17 +172,4 @@ public class Reserva {
         this.horarioSaida = horarioSaida;
     }
 
-    private void calculaPrecoDiaria(TipoQuarto tipoQuarto){
-        switch (tipoQuarto){
-            case NORMAL:
-                precoDiaria = 100.00;
-                break;
-            case SUITE:
-                precoDiaria = 150.00;
-                break;
-            case LUXO:
-                precoDiaria = 250.00;
-                break;
-        }
-    }
 }

@@ -5,8 +5,10 @@ import src.model.pessoa.clientes.Cliente;
 import src.model.pessoa.clientes.Hospede;
 import src.model.pessoa.documento.Documento;
 import src.model.pessoa.documento.InfosBasicas;
+import src.model.pessoa.documento.TipoDocumento;
 import src.model.pessoa.endereco.Endereco;
 import src.model.pessoa.funcionario.Funcionario;
+import src.model.pessoa.login.InfoLogin;
 import src.model.pessoa.login.TipoLogin;
 import src.model.reserva.Acomodacao;
 import src.model.reserva.Reserva;
@@ -15,6 +17,7 @@ import src.model.reserva.pagamento.TipoPagamento;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,15 +33,36 @@ public class Hotel {
         // DADOS MOCKADOS
 
         Acomodacao teste = new Acomodacao("12","12","ELE È BOM DMS", TipoQuarto.LUXO);
-        Acomodacao teste1 = new Acomodacao("12","33","ELE È BOM DMS", TipoQuarto.LUXO);
+       // Acomodacao teste1 = new Acomodacao("12","33","ELE È BOM DMS", TipoQuarto.LUXO);
         Acomodacao teste2 = new Acomodacao("12","44","ELE È BOM DMS", TipoQuarto.NORMAL);
         Acomodacao teste3 = new Acomodacao("12","44","ELE È BOM DMS", TipoQuarto.SUITE);
 
         this.acomodacoes = new ArrayList<Acomodacao>();
         acomodacoes.add(teste);
-        acomodacoes.add(teste1);
+        //acomodacoes.add(teste1);
         acomodacoes.add(teste2);
         acomodacoes.add(teste3);
+
+        Endereco endereco = new Endereco("CE","Fortaleza","123123","Rua das avenidas","123");
+
+        InfosBasicas infos = new InfosBasicas(TipoDocumento.RG, "45678");
+        Documento doc = new Documento(infos,"Eduardo", "Jucá", LocalDate.of(1999, Month.JANUARY, 1), "br");
+
+        InfoLogin tes = new InfoLogin("@teste","123", TipoLogin.CLIENTE);
+
+        Cliente ed = new Cliente("Ed",infos,tes);
+
+        Reserva reserva = criarReserva(ed, 1, TipoQuarto.LUXO,LocalDate.of(2011,Month.OCTOBER,20), LocalDate.of(2011,Month.OCTOBER,30));
+
+        efetuarReserva(reserva); // reserva efetuada
+
+        efetuarCheckIn(reserva, endereco, doc,"98765", LocalDateTime.of(2011, Month.OCTOBER, 20, 10, 0, 0));
+        efetuarCheckOut(reserva, TipoPagamento.BOLETO,LocalDateTime.of(2011, Month.OCTOBER, 30, 11, 0, 0));
+
+        this.funcionarios = new ArrayList<Funcionario>();
+
+        Funcionario rob = new Funcionario("roberto",doc, criarLogin("@func", "123", TipoLogin.FUNCIONARIO),reserva);
+        addFuncionarios(rob);
 
     }
 
@@ -78,6 +102,27 @@ public class Hotel {
         }
         return acomodacoesPorTipo;
     }
+
+    public Cliente criarCliente(String nome, InfosBasicas infos, InfoLogin infoLogin){
+        return new Cliente(nome, infos, infoLogin);
+    }
+
+    public InfosBasicas criarInfosBasicas(TipoDocumento tipoDocumento, String numeroDocumento){
+        return new InfosBasicas(tipoDocumento, numeroDocumento);
+    }
+
+    public LocalDate criarData(int dia, int mes, int ano){
+        return LocalDate.of(ano, mes, dia);
+    }
+
+    public InfoLogin criarLogin(String email, String senha, TipoLogin tipoLogin){
+//        if(verificaLogin(email, senha) != null){
+//            return null;
+//        }
+        return new InfoLogin(email, senha, tipoLogin);
+    }
+
+
 
     public Reserva criarReserva(Cliente hospedePrincipal, int qtdAcompanhantes, TipoQuarto tipoQuarto, LocalDate checkIn, LocalDate checkOut){
         return new Reserva(hospedePrincipal, qtdAcompanhantes, tipoQuarto, checkIn, checkOut);
@@ -165,6 +210,10 @@ public class Hotel {
         reserva.addAcompanhantes(criarAcompanhante(nome, infos));
     }
 
+    public void addFuncionarios(Funcionario funcionario){
+        funcionarios.add(funcionario);
+    }
+
     public boolean efetuarCheckOut(Reserva reserva, TipoPagamento tipoPagamento, LocalDateTime saida){
         if(reserva.getReservaAtiva()){
             Cliente cliente = new Cliente(reserva.getHospedePrincipal().getNome(),reserva.getHospedePrincipal().getInfosBasicas(), reserva.getHospedePrincipal().getInfoLogin());
@@ -220,6 +269,28 @@ public class Hotel {
             }
         }
         return null;
+    }
+
+    public InfoLogin getInfoLoginExistente(String email, String senha){
+
+            for(Acomodacao a : acomodacoes){
+                for(Reserva r : a.getReservas()){
+                    if(r.getHospedePrincipal().getInfoLogin().getEmail().equals(email)){
+                        if(r.getHospedePrincipal().getInfoLogin().getSenha().equals(senha)){
+                            return r.getHospedePrincipal().getInfoLogin();
+                        }
+                    }
+                }
+            }
+            for(Funcionario f : funcionarios){
+                if(f.getInfoLogin().getEmail().equals(email)){
+                    if(f.getInfoLogin().getSenha().equals(senha)){
+                        return f.getInfoLogin();
+                    }
+                }
+            }
+            return null;
+
     }
 
 
