@@ -21,7 +21,7 @@ Conexões diárias no Discord para esclarescer e mostrar todas as novas adiçõe
 ## O Sistema
 
 O sistema apresentado neste repositório possui sua view aplicada apenas no terminal, para que a compreensão do software seja fácil e para que compilação e execução do código seja mais simplificada.
-Caso queira acessar a Implementação do sistema com o WebVIew acesse: https://github.com/caioslopes/webapp_Hotel_Uirapuru
+Caso queira acessar a Implementação do sistema com o WebVIew acesse: https://github.com/caioslopes/webapp_Hotel_Uirapuru e https://github.com/EduardoPC05/API_HotelUirapuru
 
 ## Compilação e Execução
 
@@ -34,7 +34,9 @@ Para compilar e executar o sistema:
 
 ## Screenshots
 
-_(Inserir aqui screenshots do sistema operando)_
+![img.png](images/img.png)
+![img.png](images/img_reserva.png)
+![img.png](images/img_ver_reserva.png)
 
 ## Diagrama de Classes (opcional)
 
